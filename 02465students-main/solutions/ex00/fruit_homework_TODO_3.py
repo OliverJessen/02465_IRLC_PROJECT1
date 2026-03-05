@@ -1,0 +1,1 @@
+    return sum([x * p for x, p in p_dict.items()])

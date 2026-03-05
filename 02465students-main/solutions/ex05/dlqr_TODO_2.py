@@ -1,0 +1,1 @@
+    V[N], v[N], vc[N] = QN, qN, qcN 

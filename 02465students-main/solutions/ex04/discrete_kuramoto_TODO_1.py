@@ -1,0 +1,1 @@
+    f_euler = dmodel.f(x, u, k=0)  

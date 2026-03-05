@@ -1,0 +1,1 @@
+    agent = PIDPendulumAgent(env, dt=env.dt, Kp=12, Ki=2, Kd=2, target_angle=np.pi/6) 

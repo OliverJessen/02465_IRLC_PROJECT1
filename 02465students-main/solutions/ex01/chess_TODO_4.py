@@ -1,0 +1,1 @@
+        r = self.s[-1] == 1 if done else 0   

@@ -1,0 +1,1 @@
+    Q, R, q = compute_Q_R_q(model, dt) 

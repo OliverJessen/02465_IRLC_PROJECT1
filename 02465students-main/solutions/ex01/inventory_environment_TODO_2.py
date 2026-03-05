@@ -1,0 +1,1 @@
+        return np.random.choice(3) # Return a random action

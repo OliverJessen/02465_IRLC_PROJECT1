@@ -1,0 +1,1 @@
+        (self.L, self.l), _ = LQR(A=[A]*N, B=[B]*N, d=[d]*N if d is not None else None, Q=[Q]*N, q=[q]*N if q is not None else None, R=[R]*N) 

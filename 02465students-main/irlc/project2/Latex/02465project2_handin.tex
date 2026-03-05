@@ -1,0 +1,143 @@
+\documentclass[12pt,twoside]{article}
+%\usepackage[table]{xcolor} % important to avoid options clash.
+%\input{02465shared_preamble}
+%\usepackage{cleveref}
+\usepackage{url}
+\usepackage{graphics}
+\usepackage{multicol}
+\usepackage{rotate}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{latexsym}
+\usepackage[english]{babel}
+\usepackage{epstopdf}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow,epstopdf}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\newcommand\redt[1]{ {\textcolor[rgb]{0.60, 0.00, 0.00}{\textbf{ #1} } } }
+
+
+\newcommand{\m}[1]{\boldsymbol{ #1}}
+\newcommand{\EE}{\mathbb{E}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\yoursolution}{ \redt{(your solution here) } } 
+
+
+
+\title{ Report 2 hand-in }
+\date{ \today }
+\author{Alice (\texttt{s000001})\and  Bob (\texttt{s000002})\and Clara (\texttt{s000003}) } 
+
+\begin{document}
+\maketitle
+
+\begin{table}[ht!]
+\caption{Attribution table. Feel free to add/remove rows and columns}
+\begin{tabular}{llll}
+\toprule
+                                                                    & Alice   & Bob    & Clara   \\
+\midrule
+ 1: Formulate Yodas pendulum as a linear problem                    & 0-100\%  & 0-100\% & 0-100\%  \\
+ 2: State at a later time                                           & 0-100\%  & 0-100\% & 0-100\%  \\
+ 3: State at a later time II                                        & 0-100\%  & 0-100\% & 0-100\%  \\
+ 4: Eigenvalues and powers                                          & 0-100\%  & 0-100\% & 0-100\%  \\
+ 5: Analytical expression of Eigenvalues using Euler discretization & 0-100\%  & 0-100\% & 0-100\%  \\
+ 6: Bound using Euler discretization                                & 0-100\%  & 0-100\% & 0-100\%  \\
+ 7: Matrix norm of Exponential discretization (harder)              & 0-100\%  & 0-100\% & 0-100\%  \\
+ 8: Stability                                                       & 0-100\%  & 0-100\% & 0-100\%  \\
+ 9: Discretization                                                  & 0-100\%  & 0-100\% & 0-100\%  \\
+ 10: Linearization                                                  & 0-100\%  & 0-100\% & 0-100\%  \\
+ 11: Unitgrade self-check                                           & 0-100\%  & 0-100\% & 0-100\%  \\
+ 12: Control using simple linearization                             & 0-100\%  & 0-100\% & 0-100\%  \\
+ 13: MPC                                                            & 0-100\%  & 0-100\% & 0-100\%  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%\paragraph{Statement about collaboration:}
+%Please edit this section to reflect how you have used external resources. The following statement will in most cases suffice: 
+%\emph{The code in the irls/project1 directory is entirely}
+
+%\paragraph{Main report:}
+Headings have been inserted in the document for readability. You only have to edit the part which says \yoursolution. 
+
+\section{Master Yodas pendulum (\texttt{yoda.py})}\label{yoda1}
+\subsubsection*{{\color{red}Problem 1:  Formulate Yodas pendulum as a linear problem}}
+	
+	\begin{align}
+		A & = \begin{bmatrix} \cdots \end{bmatrix}  \\
+		B & = \begin{bmatrix} \cdots \end{bmatrix}
+	\end{align}
+	\yoursolution 	
+	
+\subsubsection*{{\color{red}Problem 2:  State at a later time}}
+	
+		To solve the first part, we can write $\m x_N = \begin{bmatrix} \cdots \end{bmatrix}$
+		
+		As for the second part we get:
+\begin{align}
+\tilde A_0 & = \begin{bmatrix} \cdots \end{bmatrix}, \quad A_0 = \begin{bmatrix} \cdots \end{bmatrix}
+\end{align}
+		\yoursolution 	
+\subsubsection*{{\color{red}Problem 4:  Eigenvalues and powers}}
+	
+Assume $\lambda_1, \lambda_2$ are the eigenvalues ... then the Eigenvalues of $M$ is ... similarly for $\tilde M$ ... 
+\yoursolution
+	
+\subsubsection*{{\color{red}Problem 5:  Analytical expression of Eigenvalues using Euler discretization}}
+
+... we get a characteristic polynomial of ... and therefore it follows from Mat1 that the two Eigenvalues are ... 
+\yoursolution
+
+\subsubsection*{{\color{red}Problem 6:  Bound using Euler discretization}}
+
+	Using Euler discretization we get the upper bound:
+	$$
+\| \m x_N \| \leq \cdots
+$$
+\yoursolution
+	
+\subsubsection*{{\color{red}Problem 7:  Matrix norm of Exponential discretization (harder)}}
+	
+Using exponential discretization we get an upper bound of:
+		$$
+		\| \m x_N \| \leq \cdots
+		$$
+		\yoursolution
+	
+\section{R2D2 and control (\texttt{r2d2.py})}
+\subsubsection*{{\color{red}Problem 9:  Discretization}}
+
+	$$
+	\m x_{k+1} = \m f_k(\m x_k, \m u_k) = \begin{bmatrix} \cdots \\ \cdots \\ \cdots \end{bmatrix}$$
+
+\subsubsection*{{\color{red}Problem 10:  Linearization}}
+	
+$$
+		\m x_{k+1} \approx \begin{bmatrix} \cdots \\ \cdots \\ \cdots \end{bmatrix} \m x_k + 
+		\begin{bmatrix} \cdots \\ \cdots \\ \cdots \end{bmatrix} \m u_k +  
+		\begin{bmatrix} \vdots \end{bmatrix} 
+$$
+	
+\subsubsection*{{\color{red}Problem 12:  Control using simple linearization}}
+			
+		% Just generate the figures using the script and change the path below. 
+		\begin{center}\includegraphics[width=.5\linewidth]{figures/your_answer}~
+		\includegraphics[width=.5\linewidth]{figures/your_answer} \end{center}
+Intuitively, the second case fails because... \yoursolution	
+	
+\subsubsection*{{\color{red}Problem 13:  MPC}}
+			
+		\begin{center}\includegraphics[width=.6\linewidth]{figures/your_answer}%~
+		%	\includegraphics[width=.5\linewidth]{figures/your_answer} 
+	\end{center}
+		Iterative linearization solves the problem because... \yoursolution
+	
+\end{document}

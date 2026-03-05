@@ -1,0 +1,1 @@
+    x_dot_numpy = model.f([1, 2], [0], t=0)  
