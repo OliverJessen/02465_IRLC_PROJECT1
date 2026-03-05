@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: irlc
+Version: 2025.0
+Summary: Toolbox for 02465: Introduction to reinforcement learning and control
+Author: Tue Herlau
+License: See information on DTU Learn.
+Dynamic: author
+Dynamic: license
+Dynamic: summary

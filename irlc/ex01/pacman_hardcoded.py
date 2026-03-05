@@ -33,8 +33,15 @@ class GoAroundAgent(Agent):
             - The function should return a string (the actions are strings such as 'North')
         """
         # TODO: 7 lines missing.
-        raise NotImplementedError("Implement function body")
-        return 'West'
+        if k < 7:
+            return 'South'
+        elif k < 14:
+            return 'East'
+        elif k < 21:
+            return 'North'
+        elif k < 28:
+        # raise NotImplementedError("Implement function body")
+            return 'West'
 
 if __name__ == "__main__":
     # Create an environment with the given layout. animate_movement is just for a nicer visualization.

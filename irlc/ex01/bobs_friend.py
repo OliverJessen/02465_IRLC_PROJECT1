@@ -10,25 +10,38 @@ class BobFriendEnvironment(gymnasium.Env):
         self.action_space = Discrete(2)     # Possible actions {0, 1} 
 
     def reset(self):
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        # TODO: 1 lines missing. (done)
+        self.s = self.x0
+        # raise NotImplementedError("Insert your solution and remove this error.")
         return self.s, {}
 
     def step(self, a):
-        # TODO: 9 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        # TODO: 9 lines missing. (done)
+        terminated = True
+        if a == 0:
+            s_next = self.s * 1.1 # return 10% interest
+        if a == 1:
+            if np.random.rand() < 1/4: # you lose all the money with probability 1/4
+                s_next = 0
+            else:
+                s_next = self.s + 12 # friend returns 12 kroner with probability 3/4
+        reward = s_next - self.s
+  
+        # raise NotImplementedError("Insert your solution and remove this error.")
         return s_next, reward, terminated, False, {}
 
 class AlwaysAction_u0(Agent):
     def pi(self, s, k, info=None):  
         """This agent should always take action u=0."""
         # TODO: 1 lines missing.
+        return 0 # always chooses action u=0
         raise NotImplementedError("Implement function body")
 
 class AlwaysAction_u1(Agent):
     def pi(self, s, k, info=None):  
         """This agent should always take action u=1."""
         # TODO: 1 lines missing.
+        return 1 # always chooses action u=1
         raise NotImplementedError("Implement function body")
 
 if __name__ == "__main__":

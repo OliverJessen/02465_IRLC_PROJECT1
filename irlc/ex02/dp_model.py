@@ -74,6 +74,9 @@ class DPModel:
         :param k: The current time step :math:`k`
         :return: The state the environment (deterministically) transitions to, i.e. :math:`x_{k+1}`
         """
+       
+        x_next = max(0, min(2, x + u - w)) # Just an example, but works for inventory control.
+        return x_next
         raise NotImplementedError("Return f_k(x,u,w)")
 
     def g(self, x, u, w, k: int) -> float:
@@ -86,6 +89,8 @@ class DPModel:
         :param k: The current time step :math:`k`
         :return: The cost (as a ``float``) incurred by the environment, i.e. :math:`g_k(x, u, w)`
         """
+        cost_function = u + (x + u - w) ** 2 # an example with state, action and noise all depending on time step k.
+        return cost_function # Just an example, but works for inventory control.
         raise NotImplementedError("Return g_k(x,u,w)")
 
     def gN(self, x) -> float:
@@ -95,6 +100,7 @@ class DPModel:
         :param x: A state seen at the last time step :math:`x_N`
         :return: The terminal cost (as a ``float``) incurred by the environment, i.e. :math:`g_N(x)`
         """
+        return 0 # Just an example, but works for inventory control.
         raise NotImplementedError("Return g_N(x)")
 
     def S(self, k: int):
@@ -109,6 +115,7 @@ class DPModel:
         :param k: The current time step :math:`k`
         :return: The state space (as a ``list`` or ``set``) available at time step ``k``, i.e. :math:`\mathcal S_k`
         """
+        return {0, 1, 2} # Just an example, but works for inventory control.
         raise NotImplementedError("Return state space as set S_k = {x_1, x_2, ...}")
 
     def A(self, x, k: int):
@@ -124,6 +131,7 @@ class DPModel:
         :param x: The state we want to compute the actions in :math:`x_k`
         :return: The action space (as a ``list`` or ``set``) available at time step ``k``, i.e. :math:`\mathcal A_k(x_k)`
         """
+        return {0, 1, 2} # Just an example, but works for inventory control.
         raise NotImplementedError("Return action space as set A(x_k) = {u_1, u_2, ...}")
 
     def Pw(self, x, u, k: int):
@@ -158,6 +166,8 @@ class DPModel:
         :param k: The current time step :math:`k`
         :return: A dictionary representing the distribution of random noise disturbances :math:`P_k(w |x_k, u_k)` of the form  ``{..., w_i: pw_i, ...}``  such that  ``pw_i = P_k(w_i | x, u)``
         """
+        P = {0:.1, 1:.7, 2:0.2} # Just an example, but works for inventory control.
+        return P
         # Compute and return the random noise disturbances here.
         # As an example:
         return {'w_dummy': 1/3, 42: 2/3}  # P(w_k="w_dummy") = 1/3, P(w_k =42)=2/3. 
