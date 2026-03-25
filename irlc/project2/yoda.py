@@ -62,7 +62,7 @@ def xN_bound_ei(g: float,L : float,Delta : float,N : int) -> float:
         * This function does NOT use all input arguments.
         * This will be the hardest problem to solve, but the easiest function to implement.
     """
-    bound = np.max(np.sqrt(g/L), 1/np.sqrt(g/L))
+    bound = 1.0
     return bound
 
 if __name__ == '__main__':
