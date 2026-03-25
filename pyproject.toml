@@ -1,0 +1,10 @@
+[project]
+name = "02465-irlc-project1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium>=1.2.3",
+    "unitgrade-devel>=0.1.64",
+]
