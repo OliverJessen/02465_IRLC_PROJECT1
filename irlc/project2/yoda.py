@@ -7,8 +7,8 @@ from numpy.linalg import matrix_power  # Computes A^n for matrix A and integer n
 def get_A_B(g : float, L: float, m=0.1): 
     r""" Compute the two matrices A, B (see Problem 1) here and return them.
     The matrices should be numpy ndarrays. """
-    # TODO: 2 lines missing.
-    raise NotImplementedError("Compute numpy matrices A and B here")
+    A = np.array([[0, 1], [-g/L, 0]], dtype=float)
+    B = np.array([[0], [1/(m*L**2)]], dtype=float)
     return A, B
 
 
@@ -18,8 +18,8 @@ def A_euler(g : float,L : float, Delta : float) -> np.ndarray:
     Hints:
         * get_A_B can perhaps save you a line or two.
     """
-    # TODO: 2 lines missing.
-    raise NotImplementedError("Implement function body")
+    A, _ = get_A_B(g, L)
+    A0_tilde = np.eye(2) + Delta * A
     return A0_tilde
 
 def A_ei(g : float,L : float, Delta : float) -> np.ndarray: 
@@ -28,8 +28,8 @@ def A_ei(g : float,L : float, Delta : float) -> np.ndarray:
     Hints:
         * The special function expm(X) computes the matrix exponential e^X. See the lecture notes for more information.
     """
-    # TODO: 2 lines missing.
-    raise NotImplementedError("Implement function body")
+    A, _ = get_A_B(g, L)
+    A0 = expm(Delta * A)
     return A0
 
 def M_euler(g : float, L : float, Delta : float, N : int) -> np.ndarray: 
@@ -37,14 +37,12 @@ def M_euler(g : float, L : float, Delta : float, N : int) -> np.ndarray:
     Hints:
         * the matrix_power(X,n) function can compute expressions such as X^n where X is a square matrix and n is a number
     """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    M_tilde = matrix_power(A_euler(g, L, Delta), N)
     return M_tilde
 
 def M_ei(g : float,L : float, Delta : float, N : int) -> np.ndarray: 
     r""" Compute M (Exponential discretization), see Problem 3 """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    M = matrix_power(A_ei(g, L, Delta), N)
     return M
 
 def xN_bound_euler(g : float, L : float,Delta : float,N : int) -> float: 
@@ -54,8 +52,7 @@ def xN_bound_euler(g : float, L : float,Delta : float,N : int) -> float:
     Hints:
         * This function uses all input arguments.
     """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    bound = np.max(np.abs(np.linalg.eigvals(M_euler(g, L, Delta, N))))
     return bound
 
 def xN_bound_ei(g: float,L : float,Delta : float,N : int) -> float: 
@@ -65,8 +62,7 @@ def xN_bound_ei(g: float,L : float,Delta : float,N : int) -> float:
         * This function does NOT use all input arguments.
         * This will be the hardest problem to solve, but the easiest function to implement.
     """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    bound = np.max(np.sqrt(g/L), 1/np.sqrt(g/L))
     return bound
 
 if __name__ == '__main__':
