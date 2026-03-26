@@ -142,6 +142,7 @@ def drive_to_linearization(x_target, plot=True):
     (L, l), _ = LQR(A=[A]*N, B=[B]*N, d=[d]*N, Q=[Q]*N, q=[q]*N, R=[R]*N)
     agent = FixedLinearizationAgent(env, L, l)
     _, traj = train(env, agent, num_episodes=1, return_trajectory=True)
+    plot_trajectory(traj[0], env)
     return traj[0].state
 
 
@@ -165,6 +166,7 @@ def drive_to_mpc(x_target, plot=True) -> np.ndarray:
     env = R2D2Environment(x_target=x_target, dt=dt)
     agent = MPCLinearizationAgent(env, horizon=50)
     _, traj = train(env, agent, num_episodes=1, return_trajectory=True)
+    plot_trajectory(traj[0], env)
     return traj[0].state
 
 if __name__ == "__main__":
