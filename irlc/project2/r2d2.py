@@ -1,5 +1,6 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 import time
+from irlc.ex05.dlqr import LQR
 import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
@@ -38,8 +39,9 @@ class R2D2Model(ControlModel): # This may help you get started.
     def x0_bound(self) -> Box:
         return Box(0, 0, shape=(self.state_size,))
 
-    # TODO: 3 lines missing.
-    raise NotImplementedError("Complete model dynamics here.")
+    def sym_f(self, x, u, t=None):
+        v, omega = u
+        return [v * sym.cos(x[2]), v * sym.sin(x[2]), omega]
 
     """The following two methods allows the environment to be rendered as in:
     
@@ -66,15 +68,34 @@ class R2D2Environment(ControlEnvironment):
         dmodel = DiscreteControlModel(model, dt=dt)   # Create a discrete version of the R2D2 ControlModel
         super().__init__(dmodel, Tmax=Tmax, render_mode=render_mode)
 
-# TODO: 9 lines missing.
-raise NotImplementedError("Your code here.")
+class FixedLinearizationAgent(Agent):
+    def __init__(self, env, L, l):
+        self.L, self.l = L, l
+        super().__init__(env)
+
+    def pi(self, x, k, info=None):
+        return self.L[0] @ x + self.l[0]
+
+class MPCLinearizationAgent(Agent):
+    def __init__(self, env, horizon=50):
+        self.horizon = horizon
+        self.u_bar = np.zeros(2)
+        super().__init__(env)
+
+    def pi(self, x, k, info=None):
+        A, B, d = linearize(x, self.u_bar, Delta=dt)
+        Q, q, R = self.env.discrete_model.cost.Q, self.env.discrete_model.cost.q, self.env.discrete_model.cost.R
+        (L, l), _ = LQR(A=[A]*self.horizon, B=[B]*self.horizon, d=[d]*self.horizon,
+                        Q=[Q]*self.horizon, q=[q]*self.horizon, R=[R]*self.horizon)
+        u = L[0] @ x + l[0]
+        self.u_bar = u
+        return u
 
 def f_euler(x : np.ndarray, u : np.ndarray, Delta=0.05) -> np.ndarray: 
     """ Solve Problem 9. The function should compute
     > x_next = f_k(x, u)
     """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("return next state")
+    x_next = x + Delta * np.array([u[0] * np.cos(x[2]), u[0] * np.sin(x[2]), u[1]])
     return x_next
 
 def linearize(x_bar, u_bar, Delta=0.05):
@@ -86,8 +107,15 @@ def linearize(x_bar, u_bar, Delta=0.05):
     The function should return linearization matrices A, B and d.
     """
     # Create A, B, d as numpy ndarrays.
-    # TODO: 4 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    v = u_bar[0]
+    gamma = x_bar[2]
+    A = np.array([[1, 0, -Delta * v * np.sin(gamma)],
+                  [0, 1,  Delta * v * np.cos(gamma)],
+                  [0, 0, 1]])
+    B = np.array([[Delta * np.cos(gamma), 0],
+                  [Delta * np.sin(gamma), 0],
+                  [0, Delta]])
+    d = f_euler(x_bar, u_bar, Delta) - A @ x_bar - B @ u_bar
     return A, B, d
 
 def drive_to_linearization(x_target, plot=True): 
@@ -106,8 +134,14 @@ def drive_to_linearization(x_target, plot=True):
     Hints:
         * The control method is identical to one we have seen in the exercises/notes. You can re-purpose the code from that week.
     """
-    # TODO: 7 lines missing.
-    raise NotImplementedError("Implement function body")
+    from irlc.ex05.dlqr import LQR
+    env = R2D2Environment(x_target=x_target, dt=dt)
+    A, B, d = linearize(np.zeros(3), np.zeros(2), Delta=dt)
+    Q, q, R = env.discrete_model.cost.Q, env.discrete_model.cost.q, env.discrete_model.cost.R
+    N = 50
+    (L, l), _ = LQR(A=[A]*N, B=[B]*N, d=[d]*N, Q=[Q]*N, q=[q]*N, R=[R]*N)
+    agent = FixedLinearizationAgent(env, L, l)
+    _, traj = train(env, agent, num_episodes=1, return_trajectory=True)
     return traj[0].state
 
 
@@ -128,8 +162,9 @@ def drive_to_mpc(x_target, plot=True) -> np.ndarray:
        by the linearization agent.
      * My approach was to implement a variant of the LinearizationAgent.
     """
-    # TODO: 6 lines missing.
-    raise NotImplementedError("Implement function body")
+    env = R2D2Environment(x_target=x_target, dt=dt)
+    agent = MPCLinearizationAgent(env, horizon=50)
+    _, traj = train(env, agent, num_episodes=1, return_trajectory=True)
     return traj[0].state
 
 if __name__ == "__main__":
