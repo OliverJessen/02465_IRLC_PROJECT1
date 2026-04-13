@@ -1,0 +1,90 @@
+\documentclass[12pt,twoside]{article}
+%\usepackage[table]{xcolor} % important to avoid options clash.
+%\input{02465shared_preamble}
+%\usepackage{cleveref}
+\usepackage{url}
+\usepackage{graphics}
+\usepackage{multicol}
+\usepackage{rotate}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{latexsym}
+\usepackage[english]{babel}
+\usepackage{epstopdf}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow,epstopdf}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\newcommand\redt[1]{ {\textcolor[rgb]{0.60, 0.00, 0.00}{\textbf{ #1} } } }
+
+
+\newcommand{\m}[1]{\boldsymbol{ #1}}
+\newcommand{\EE}{\mathbb{E}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\yoursolution}{ \redt{(your solution here) } } 
+
+
+
+\title{ Report 3 hand-in }
+\date{ \today }
+\author{Alice (\texttt{s000001})\and  Bob (\texttt{s000002})\and Clara (\texttt{s000003}) } 
+
+\begin{document}
+\maketitle
+
+\begin{table}[ht!]
+\caption{Attribution table. Feel free to add/remove rows and columns}
+\begin{tabular}{llll}
+\toprule
+                                                                           & Alice   & Bob    & Clara   \\
+\midrule
+ 1: Optimal policy                                                         & 0-100\%  & 0-100\% & 0-100\%  \\
+ 2: Simulating a finite approximation of the optimal action-value function & 0-100\%  & 0-100\% & 0-100\%  \\
+ 3: Analytically computing the optimal action-value function               & 0-100\%  & 0-100\% & 0-100\%  \\
+ 4: Extend solution to all states and actions                              & 0-100\%  & 0-100\% & 0-100\%  \\
+ 5: Modified reward function                                               & 0-100\%  & 0-100\% & 0-100\%  \\
+ 6: Sarlacc rules                                                          & 0-100\%  & 0-100\% & 0-100\%  \\
+ 7: Escape the Sarlacc                                                     & 0-100\%  & 0-100\% & 0-100\%  \\
+ 8: Long bridge                                                            & 0-100\%  & 0-100\% & 0-100\%  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%\paragraph{Statement about collaboration:}
+%Please edit this section to reflect how you have used external resources. The following statement will in most cases suffice: 
+%\emph{The code in the irls/project1 directory is entirely}
+
+%\paragraph{Main report:}
+Headings have been inserted in the document for readability. You only have to edit the part which says \yoursolution. 
+
+\section{Jar-Jar at the battle of Naboo (\texttt{jarjar.py})}
+\subsubsection*{{\color{red}Problem 3:  Analytically computing the optimal action-value function}}
+	
+		Using that ... we obtain 
+		\begin{align}
+			Q^*(0,1) & = \cdots \\
+			Q^*(1,-1) & = \cdots
+		\end{align}
+		therefore...
+	
+\subsubsection*{{\color{red}Problem 5:  Modified reward function}}
+	
+Using ... we get that ...:
+		\begin{align}
+			v_\pi(s) = \dots.
+		\end{align}
+	
+\section{The great sarlacc (\texttt{sarlacc.py})} 
+\section{Optimal escape}
+\subsubsection*{{\color{red}Problem 8:  Long bridge}}
+	
+			Because ... we see that if $\cdots > \cdots$ one should go left, if  $\cdots < \cdots$ one should go right,
+	and when $\cdots = \cdots$ it makes no difference.
+		
+\end{document}

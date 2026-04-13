@@ -17,8 +17,8 @@ class MCControlAgentOneState(MCAgent):
         for s in self.env.mdp.nonterminal_states:
             for a in self.env.mdp.A(s):
                 if (s,a) != self.state_action:
-                    self.returns_sum[s,a] = val
-                    self.returns_count[s,a] = val
+                    self.returns_sum_S[s,a] = val
+                    self.returns_count_N[s,a] = val
                     k = next(self.env.mdp.Psr(s, self.env.mdp.A(s)[0]).keys().__iter__() )[0]
                     if not self.env.mdp.is_terminal(k):
                         self.Q[s,a] = 0

@@ -1,0 +1,1 @@
+                J_new = cost_of_trajectory(model, x_hat, u_hat) 

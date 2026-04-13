@@ -1,0 +1,1 @@
+    V_s = sum( [Q[s,a] * p for a, p in policy.items()] ) 

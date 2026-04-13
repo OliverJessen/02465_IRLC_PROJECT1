@@ -1,0 +1,1 @@
+                    self.v[s] = self.v[s] + self.alpha * (G - self.v[s])

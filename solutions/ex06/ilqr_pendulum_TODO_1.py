@@ -1,0 +1,1 @@
+    xs, us, J_hist, L, l = ilqr(model, N, x0, n_iter=n_iter, use_linesearch=use_linesearch)  

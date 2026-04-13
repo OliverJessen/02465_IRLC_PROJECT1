@@ -1,0 +1,1 @@
+    bandit2 = StationaryBandit(k=10, q_star_mean=4) 

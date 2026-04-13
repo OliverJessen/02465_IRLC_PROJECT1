@@ -1,0 +1,1 @@
+    eval_and_plot(bandit1, agents2, steps=10000, labels=labels)   

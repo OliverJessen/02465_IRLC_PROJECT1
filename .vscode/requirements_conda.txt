@@ -1,0 +1,15 @@
+# On linux, you should run this command (or equivalent) also need these packages:
+# > apt install build-essential python3.11-dev swig
+# (replace 3.11 with your python version; for instance python3.12-dev.
+gymnasium[box2d]
+torch
+sympy
+tqdm
+seaborn
+pillow
+scikit-learn
+matplotlib
+requests # Required when updating the local files (read stuff from gitlab).
+pyqt6 # Try pyqt
+pygame
+

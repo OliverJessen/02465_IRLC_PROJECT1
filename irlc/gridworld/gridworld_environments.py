@@ -231,10 +231,10 @@ class GridworldEnvironment(MDP2GymEnv):
         if self.display_pygame is not None:
             self.display_pygame.close()
 
-
 class BookGridEnvironment(GridworldEnvironment):
     def __init__(self, *args, **kwargs):
         super().__init__(grid_book_grid, *args, **kwargs)
+
 
 class BridgeGridEnvironment(GridworldEnvironment):
     def __init__(self, *args, **kwargs):

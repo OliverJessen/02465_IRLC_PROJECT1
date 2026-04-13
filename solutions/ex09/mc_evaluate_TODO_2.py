@@ -1,0 +1,1 @@
+            returns.append((s_t, G))

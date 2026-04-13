@@ -1,0 +1,1 @@
+            u = self.ubar[k] + self.L[k]@ (x-self.xbar[k]) + self.l[k] 

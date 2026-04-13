@@ -3,8 +3,8 @@ from irlc.gridworld.gridworld_environments import BookGridEnvironment
 from irlc import interactive, train
 from irlc.gridworld.demo_agents.hidden_agents import PolicyEvaluationAgent2
 
-def policy_evaluation(env=None):
-    agent = PolicyEvaluationAgent2(env, gamma=1., steps_between_policy_improvement=None, only_update_current=False)
+def policy_evaluation(env=None, gamma=1.):
+    agent = PolicyEvaluationAgent2(env, gamma=gamma, steps_between_policy_improvement=None, only_update_current=False)
     env, agent = interactive(env, agent)
     train(env, agent, num_episodes=100)
     env.close()

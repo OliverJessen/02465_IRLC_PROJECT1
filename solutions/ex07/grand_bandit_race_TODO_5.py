@@ -1,0 +1,1 @@
+    eval_and_plot(bandit2, agents, max_episodes=2000, labels=labels) 

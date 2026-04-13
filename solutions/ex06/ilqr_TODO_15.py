@@ -1,0 +1,1 @@
+        u_star[i] = u_bar[i] + alpha * l[i] + L[i] @ (x[i] - x_bar[i]) 

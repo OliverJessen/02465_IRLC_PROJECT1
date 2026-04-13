@@ -1,0 +1,1 @@
+        return list( range(1, min(s, self.goal - s) + 1))

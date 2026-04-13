@@ -1,0 +1,1 @@
+    labels += [f"Mov.avg. agent, epsilon={epsilon}, alpha={alpha}" for alpha in alphas] 

@@ -1,0 +1,5 @@
+    agents = [BasicAgent(bandit1, epsilon=epsilon)] 
+    agents += [MovingAverageAgent(bandit1, epsilon=epsilon, alpha=alpha)]
+    agents += [GradientAgent(bandit1, alpha=alpha,use_baseline=False) ]
+    agents += [GradientAgent(bandit1, alpha=alpha,use_baseline=True) ]
+    agents += [UCBAgent(bandit1, c=2)] 

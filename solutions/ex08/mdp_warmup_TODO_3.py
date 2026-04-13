@@ -1,0 +1,1 @@
+    expected_reward = sum( [r * p for (sp, r), p in mdp.Psr(s, a).items() ] ) 

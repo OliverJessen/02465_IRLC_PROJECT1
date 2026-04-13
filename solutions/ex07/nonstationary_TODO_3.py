@@ -1,0 +1,1 @@
+        self.Q[a] = self.Q[a] + self.alpha * (r-self.Q[a])
