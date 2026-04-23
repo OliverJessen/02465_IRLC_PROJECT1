@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 from gymnasium import logger
 from irlc.ex01.agent import Agent

@@ -1,20 +1,17 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 import matplotlib.pyplot as plt
 import numpy as np
+from functools import lru_cache
 
 
 def pi_optimal(s : int) -> int: 
     """ Compute the optimal policy for Jar-Jar binks. Don't overthink this one! """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Return the optimal action in state s.")
-    return action
+    return -1 if s >= 0 else 1
 
 def Q0_approximate(gamma : float, N : int) -> float: 
     """ Return the (estimate) of the optimal action-value function Q^*(0,1) based on
     the first N rewards using a discount factor of gamma. Note the similarity to the n-step estimator. """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Return N-term approximation of the optimal action-value function Q^*(0,1)")
-    return return_estimate
+    return sum(gamma ** (2 * k + 1) for k in range(N // 2))
 
 def Q_exact(s : int,a : int, gamma : float) -> float:
     """
@@ -27,8 +24,15 @@ def Q_exact(s : int,a : int, gamma : float) -> float:
 
     *Don't* use your solution to Q0_approximate; it is an approximate (finite-horizon) approximation.
     """
-    # TODO: 6 lines missing.
-    raise NotImplementedError("return optimal action-value function Q^*(s,a) as a float.")
+    @lru_cache(None)
+    def V(x: int) -> float:
+        if x == 0:
+            return -gamma / (1 - gamma ** 2)
+        if x < 0:
+            return V(-x)
+        return -x + gamma * V(x - 1)
+
+    return -abs(s) + gamma * V(s + a)
 
 
 if __name__ == "__main__":
