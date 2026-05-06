@@ -66,8 +66,6 @@ class PolicyEvaluationAgent2(TabularAgent):
     def reset(self):
         self.v = defaultdict(lambda: 0)
 
-
-
     def pi(self, s,k, info=None):  
         # TODO: 1 lines missing.
         raise NotImplementedError("Implement function body")

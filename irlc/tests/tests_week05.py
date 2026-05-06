@@ -132,8 +132,8 @@ class Problem7_8_PidLQR(UTestCase):
 
 
 
-class Week06Tests(Report):
-    title = "Tests for week 06"
+class Week05Tests(Report):
+    title = "Tests for week 05"
     pack_imports = [irlc]
     individual_imports = []
     questions = [
@@ -144,4 +144,4 @@ class Week06Tests(Report):
                  ]
 if __name__ == '__main__':
     from unitgrade import evaluate_report_student
-    evaluate_report_student(Week06Tests())
+    evaluate_report_student(Week05Tests())

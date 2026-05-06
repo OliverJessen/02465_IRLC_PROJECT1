@@ -262,8 +262,8 @@ class NonstatiotnaryAgentQuestion(BanditQuestion):
         return bandit, agent
 
 import irlc
-class Week08Tests(Report):
-    title = "Tests for week 08"
+class Week07Tests(Report):
+    title = "Tests for week 07"
     pack_imports = [irlc]
     individual_imports = []
     questions = [
@@ -275,4 +275,4 @@ class Week08Tests(Report):
 
 if __name__ == '__main__':
     from unitgrade import evaluate_report_student
-    evaluate_report_student(Week08Tests())
+    evaluate_report_student(Week07Tests())

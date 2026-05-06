@@ -6,6 +6,6 @@ good_seed = 2
 bad_seed = 1
 
 if __name__ == "__main__":
-    np.random.seed(good_seed) # (2: ok, 1: fail).
-    #np.random.seed(bad_seed) # (2: ok, 1: fail).
+    #np.random.seed(good_seed) # (2: ok, 1: fail).
+    np.random.seed(bad_seed) # (2: ok, 1: fail).
     pen_experiment(N=50, use_linesearch=False, use_ubar=False)

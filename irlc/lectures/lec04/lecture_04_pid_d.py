@@ -2,4 +2,4 @@
 from irlc.lectures.lec04.lecture_04_pid_p import pidplot
 
 if __name__ == "__main__":
-    pidplot(Kp=40, Kd=100, Ki=0)
+    pidplot(Kp=40, Kd=60, Ki=0)

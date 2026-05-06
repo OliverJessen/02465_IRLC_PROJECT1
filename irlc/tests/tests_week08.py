@@ -294,8 +294,8 @@ class Problem8ValueIterationAgent(UTestCase):
 #             from irlc.gridworld.gridworld_environments import BookGridEnvironment
 #             return BookGridEnvironment(living_reward=-0.6)
 
-class Week09Tests(Report):
-    title = "Tests for week 09"
+class Week08Tests(Report):
+    title = "Tests for week 08"
     pack_imports = [irlc]
     individual_imports = []
     questions = [ (Problem1_to_3_Warmup, 10),
@@ -311,4 +311,4 @@ class Week09Tests(Report):
 
 if __name__ == '__main__':
     from unitgrade import evaluate_report_student
-    evaluate_report_student(Week09Tests())
+    evaluate_report_student(Week08Tests())

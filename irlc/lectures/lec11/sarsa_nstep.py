@@ -1,6 +1,6 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 from irlc.gridworld.gridworld_environments import BookGridEnvironment
-from irlc.lectures.lec11.sarsa_nstep_delay import SarsaDelayNAgent
+from irlc.lectures.lec10.sarsa_nstep_delay import SarsaDelayNAgent
 from irlc import interactive, train
 
 if __name__ == "__main__":

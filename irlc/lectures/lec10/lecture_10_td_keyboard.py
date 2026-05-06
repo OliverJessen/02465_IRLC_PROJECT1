@@ -1,5 +1,5 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
-from irlc.lectures.lec10.lecture_10_mc_q_estimation import automatic_play_value
+from irlc.lectures.lec09.lecture_10_mc_q_estimation import automatic_play_value
 from irlc.gridworld.gridworld_environments import BookGridEnvironment
 from irlc.ex10.td0_evaluate import TD0ValueAgent
 from irlc.lectures.lec10.utils import agent_reset

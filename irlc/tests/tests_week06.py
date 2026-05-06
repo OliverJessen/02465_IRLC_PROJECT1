@@ -47,8 +47,8 @@ class ILQRPendulumQuestion(UTestCase):
         state = trajectories[-1].state[-1]
         self.assertL2(state, tol=2e-2)
 
-class Week07Tests(Report): #240 total.
-    title = "Tests for week 07"
+class Week06Tests(Report): #240 total.
+    title = "Tests for week 06"
     pack_imports = [irlc]
     individual_imports = []
     questions = [
@@ -59,4 +59,4 @@ class Week07Tests(Report): #240 total.
 
 if __name__ == '__main__':
     from unitgrade import evaluate_report_student
-    evaluate_report_student(Week07Tests())
+    evaluate_report_student(Week06Tests())

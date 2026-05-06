@@ -1,5 +1,4 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
-from irlc.ex01.agent import Agent
 from irlc.gridworld.gridworld_environments import BookGridEnvironment, FrozenLakeEnv
 # from irlc.utils.video_monitor import VideoMonitor
 from irlc import interactive, train

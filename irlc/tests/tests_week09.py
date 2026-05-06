@@ -90,8 +90,8 @@ class ExamQuestionTD0(UTestCase):
     def test_c(self):
         v, states, rewards, gamma, alpha = self.get_problem()
         self.assertEqualC(c_perform_td0_batched(v, states, rewards, gamma, alpha))
-class Week10Tests(Report):
-    title = "Tests for week 10"
+class Week09Tests(Report):
+    title = "Tests for week 9"
     pack_imports = [irlc]
     individual_imports = []
     questions = [(MCAgentQuestion, 10),
@@ -101,4 +101,4 @@ class Week10Tests(Report):
 
 if __name__ == '__main__':
     from unitgrade import evaluate_report_student
-    evaluate_report_student(Week10Tests())
+    evaluate_report_student(Week09Tests())
