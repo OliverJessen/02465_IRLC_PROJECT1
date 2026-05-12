@@ -1,0 +1,1 @@
+        self.Q[s,a] += self.alpha * (r + (self.gamma * self.Q[sp, self.Q.get_optimal_action(sp, info_sp)] if not done else 0) - self.Q[s,a])

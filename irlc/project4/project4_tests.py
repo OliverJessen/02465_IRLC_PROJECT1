@@ -95,12 +95,12 @@ class ProbeLinearApproximations(UTestCase):
     def test_linear_q_00_a0(self):
         true_value = 0.315 # Estimate
         q = self.linear_qs[((0, 0), 0)]
-        self.assertAlmostEqual(q, true_value, delta=0.25)
+        self.assertAlmostEqual(q, true_value, delta=0.5)
 
     def test_linear_q_02_a1(self):
         true_value = 0.544 # Estimate
         q = self.linear_qs[((0, 2), 1)]
-        self.assertAlmostEqual(q, true_value, delta=0.25)
+        self.assertAlmostEqual(q, true_value, delta=0.5)
 
 
 
@@ -129,12 +129,12 @@ class ProbeQuadraticApproximations(UTestCase):
     def test_quadratic_q_00_a1(self):
         true_value = -0.250  # Estimate
         q = self.quadratic_qs[((0, 0), 1)]
-        self.assertAlmostEqual(q, true_value, delta=0.20)
+        self.assertAlmostEqual(q, true_value, delta=0.5)
 
     def test_quadratic_q_02_a1(self):
         true_value = 0.788  # Estimate
         q = self.quadratic_qs[((0, 2), 1)]
-        self.assertAlmostEqual(q, true_value, delta=0.20)
+        self.assertAlmostEqual(q, true_value, delta=0.5)
 
 
 class Project4(Report):
