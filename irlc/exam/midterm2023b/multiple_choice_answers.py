@@ -1,8 +1,8 @@
 answers = {
-    1: 'E', # Input A, B, C, D, or E.
-    2: 'E', # Input A, B, C, D, or E.
-    3: 'E', # Input A, B, C, D, or E.
-    4: 'E', # Input A, B, C, D, or E.
+    1: 'A', # Input A, B, C, D, or E.
+    2: 'A', # Input A, B, C, D, or E.
+    3: 'D', # Input A, B, C, D, or E.
+    4: 'C', # Input A, B, C, D, or E.
 }
 
 def check_answers():

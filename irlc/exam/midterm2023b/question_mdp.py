@@ -44,20 +44,28 @@ class SmallGambler(MDP):
 
 def a_get_reward(s : int, a : int) -> float:
     mdp = SmallGambler()
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    avg_reward = 0
+    for (sp, r), p in mdp.Psr(s, a).items():
+        avg_reward += p * r
     return avg_reward
 
 def b_get_best_immediate_action(s : int) -> int:
     mdp = SmallGambler()
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    if s not in mdp.nonterminal_states:
+        return 0
+    action_values = {a: a_get_reward(s, a) for a in mdp.A(s)}
+    astar = max(action_values, key=action_values.get)
     return astar
 
 def c_get_best_action_twosteps(s : int) -> int:
     mdp = SmallGambler()
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    action_values = {}
+    for a in mdp.A(s):
+        action_values[a] = 0
+        for (sp, r), p in mdp.Psr(s, a).items():
+            ap = b_get_best_immediate_action(sp)
+            action_values[a] += p * (r + a_get_reward(sp, ap))
+    astar = max(action_values, key=action_values.get)
     return astar
 
 if __name__ == "__main__":

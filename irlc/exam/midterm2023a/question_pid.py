@@ -1,17 +1,38 @@
 
+def pid(xs : list, xstar : float, Kp=0., Ki=0., Kd=0., stable=False):
+    us = []
+    e_prev = 0
+    es = []
+    I = 0
+    Delta = 1
+    for k, x in enumerate(xs):
+        e = xstar - x
+        es.append(e)
+        I += Delta * e
+
+        if k > 2 and stable:
+            d1 = (es[-1] - es[-2]) / Delta
+            d2 = (es[-2] - es[-3]) / Delta
+            dterm = (d1 + d2) / 2
+        else:
+            dterm = (e - e_prev) / Delta
+
+        u = Kp * e + Ki * I + Kd * dterm
+        e_prev = e
+        us.append(u)
+    return us[-1]
+
+
 def a_pid_Kp(xs : list, xstar : float, Kp : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    u = pid(xs, xstar, Kp=Kp)
     return u
 
 def b_pid_full(xs : list, xstar : float, Kp : float, Ki : float, Kd : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    u = pid(xs, xstar, Kp=Kp, Ki=Ki, Kd=Kd)
     return u
 
 def c_pid_stable(xs : list, xstar : float, Kp : float, Ki : float, Kd : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    u = pid(xs, xstar, Kp=Kp, Ki=Ki, Kd=Kd, stable=True)
     return u
 
 
