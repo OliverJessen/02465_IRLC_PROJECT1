@@ -8,12 +8,12 @@ from irlc.ex04.model_harmonic import HarmonicOscilatorEnvironment
 from irlc.ex05.boeing_lqr import compute_A_B_d, compute_Q_R_q
 
 class ConstantLQRAgent(LQRAgent):
-    # TODO: 3 lines missing.
-    raise NotImplementedError("Complete this agent here. You need to update the policy-function: def pi(self, ..).")
+    def pi(self,x, k, info=None): 
+        action = self.L[0] @ x + self.l[0]
+        return action 
 
 def get_Kp_Kd(L0):
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Use lqr_agent.L to define Kp and Kd.")
+    Kp, Kd = (-L0).flat  
     return Kp, Kd
 
 

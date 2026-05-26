@@ -16,10 +16,7 @@ class DynamicalProgrammingAgent(Agent):
     def pi(self, s, k, info=None):
         if k >= len(self.pi_):
             raise Exception("k >= N; I have not planned this far!")
-        ## TODO: Half of each line of code in the following 1 lines have been replaced by garbage. Make it work and remove the error.
-        #----------------------------------------------------------------------------------------------------------------------------
-        action = self.pi_[k][s]  # choose the action according to step k and action space S.
-        # raise NotImplementedError("Get the action according to the DP policy.")
+        action = self.pi_[k][s] 
         return action
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None):  # Do nothing; this is DP so no learning takes place.

@@ -19,8 +19,7 @@ class DoubleQAgent(DeepQAgent):
         self.memory.push(s, a, r, sp, done)
         if len(self.memory) > self.replay_buffer_minreplay:
             self.experience_replay()
-            # TODO: 1 lines missing.
-            raise NotImplementedError("update Phi here in the self.target network")
+            self.target.update_Phi(self.Q, tau=self.tau) 
         self.steps, self.episodes = self.steps + 1, self.episodes + done
 
     def experience_replay(self):
@@ -32,8 +31,11 @@ class DoubleQAgent(DeepQAgent):
         > q-hat_{\phi'}(s,:).
         Asides this, the code will be nearly identical to the basic DQN agent """
         s,a,r,sp,done = self.memory.sample(self.batch_size)
-        # TODO: 5 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        sp[done, :] = 0 
+        astar = np.argmax(self.Q(sp), axis=1)  * (1-np.asarray(done))
+        y = r[:,0] + self.gamma * self.target(sp)[range(len(sp)), astar] * (1 - done)
+        target = self.Q(s)
+        target[range(len(a)), a] = y 
         self.Q.fit(s, target=target)
 
     def save(self, path):

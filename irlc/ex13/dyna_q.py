@@ -32,8 +32,7 @@ class DynaQ(QAgent):
         """
         Update the Q-function self.Q[s,a] as in regular Q-learning
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement function body")
+        self.Q[s,a] += self.alpha * (r + (self.gamma * self.Q[sp, self.Q.get_optimal_action(sp, info_sp)] if not done else 0) - self.Q[s,a])
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None):
         self.q_update(s,a,r,sp,done, info_s, info_sp)
@@ -41,8 +40,8 @@ class DynaQ(QAgent):
         for _ in range(self.n): 
             """ Obtain a random transition from the replay buffer. You can use np.random.randint 
             then call self.q_update on the random sample. """
-            # TODO: 2 lines missing.
-            raise NotImplementedError("Implement function body")
+            s_, a_, r_, sp_,done_ = self.Model[np.random.randint(len(self.Model))]
+            self.q_update(s_,a_,r_,sp_,done_, info_s, info_sp) 
 
     def __str__(self):
         return f"DynaQ_{self.gamma}_{self.epsilon}_{self.alpha}_{self.n}"
@@ -80,8 +79,7 @@ if __name__ == "__main__":
     env = gym.make('CliffWalking-v0')
     gamma, alpha, epsilon = 1, 0.5, 0.1
     # Call the dyna_experiment(...) function here similar to the previous call but using new parameters.
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    experiments = dyna_experiment(env, env_name='cliff',num_episodes=200,epsilon=epsilon, alpha=alpha, gamma=gamma, runs=4) 
     main_plot(experiments, smoothing_window=5)
     plt.ylim([-150, 0])
     plt.title("Dyna-Q learning on " + env.spec.name)

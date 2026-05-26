@@ -8,8 +8,7 @@ class ValueIterationAgent(TabularAgent):
     def __init__(self, env, mdp=None, gamma=1, epsilon=0, **kwargs):
         super().__init__(env)
         self.epsilon = epsilon
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Call the value_iteration function and store the policy for later.")
+        self.policy, self.v = value_iteration(mdp, gamma=gamma, **kwargs) 
 
     def pi(self, s, k, info=None):
         """ With probability (1-epsilon), the take optimal action as computed using value iteration
@@ -20,8 +19,7 @@ class ValueIterationAgent(TabularAgent):
         else:
             """ Return the optimal action here. This should be computed using value-iteration. 
              To speed things up, I recommend calling value-iteration from the __init__-method and store the policy. """
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Compute and return optimal action according to value-iteration.")
+            action = self.policy[s] 
             return action
 
     def __str__(self):

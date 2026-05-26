@@ -25,16 +25,14 @@ class GamblerMDP(MDP):
 
     def is_terminal(self, state): 
         """ Implement if the state is terminal (0 or self.goal) """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Return true only if state is terminal.")
+        return state in [0, self.goal]
 
     def A(self, s):  
         r""" Action is the amount you choose to gamle.
         You can gamble from 0 and up to the amount of money you have (state),
         but not so much you will exceed the goal amount (see (SB18) for details).
         In other words, return this as a list, and the number of elements should depend on the state s. """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement function body")
+        return list( range(1, min(s, self.goal - s) + 1))
 
     def Psr(self, s, a):  
         """ Implement transition probabilities here. 
@@ -46,8 +44,10 @@ class GamblerMDP(MDP):
         but now you should keep in mind that since you can win (or not) the dictionary you return should have two entries:
         one with a probability of self.p_heads (winning) and one with a probability of 1-self.p_heads (loosing). 
         """
-        # TODO: 4 lines missing.
-        raise NotImplementedError("Implement function body")
+        r = 1 if s + a == 100 else 0
+        WIN = (s+a, r)
+        LOSS = (s-a, 0)
+        outcome_dict = {WIN: self.p_heads, LOSS: 1-self.p_heads } if WIN != LOSS else {WIN: 1.} 
         return outcome_dict
 
 def gambler():

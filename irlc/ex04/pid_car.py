@@ -16,11 +16,8 @@ class PIDCarAgent(Agent):
         I did not use Kd/Ki, however you need to think a little about the targets.
         """
         # self.pid_angle = ...
-        ## TODO: Half of each line of code in the following 2 lines have been replaced by garbage. Make it work and remove the error.
-        #----------------------------------------------------------------------------------------------------------------------------
-        # self.pid_angle = PID(dt=env.discrete_m??????????????????????????????????????
-        # self.pid_velocity = PID(dt=env.discrete_mod???????????????????????????????????????????
-        raise NotImplementedError("Define PID controllers here.")
+        self.pid_angle = PID(dt=env.discrete_model.dt, Kp=1.0, Ki=0, Kd=0, target=0) 
+        self.pid_velocity = PID(dt=env.discrete_model.dt, Kp=1.5, Ki=0, Kd=0, target=v_target) 
         self.use_both_x5_x3 = use_both_x5_x3 # Using both x3+x5 seems to make it a little easier to get a quick lap time, but you can just use x5 to begin with.
         super().__init__(env)
 
@@ -36,8 +33,8 @@ class PIDCarAgent(Agent):
             - Remember the function must return a 2d numpy ndarray.
         """
 
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Compute action here. No clipping necesary.")
+        xx = x[5] + x[3] if self.use_both_x5_x3 else x[5] 
+        u = np.asarray([self.pid_angle.pi(xx), self.pid_velocity.pi(x[0])]) 
         return u
 
 

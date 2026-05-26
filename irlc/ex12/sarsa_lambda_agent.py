@@ -31,15 +31,12 @@ class SarsaLambdaAgent(SarsaAgent):
         self.e = defaultdict(float)
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None):
-        # TODO: 1 lines missing.
-        raise NotImplementedError("a_prime = ... (get action for S'=sp using self.pi_eps; see Sarsa)")
-        # TODO: 1 lines missing.
-        raise NotImplementedError("delta = ... (The ordinary Sarsa learning signal)")
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Update the eligibility trace e(s,a) += 1")
+        a_prime = self.pi_eps(sp, info_sp) if not done else -1 
+        delta = r + self.gamma * (self.Q[sp,a_prime] if not done else 0) - self.Q[s,a]  
+        self.e[(s,a)] += 1 
         for (s,a), ee in self.e.items():
-            # TODO: 2 lines missing.
-            raise NotImplementedError("Update Q values and eligibility trace")
+            self.Q[s,a] += self.alpha * delta * ee 
+            self.e[(s,a)] = self.gamma * self.lamb * ee  
         if done: # Clear eligibility trace after each episode and update variables for Sarsa
             self.e.clear()
         else:

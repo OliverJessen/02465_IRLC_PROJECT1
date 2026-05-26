@@ -23,17 +23,18 @@ if __name__ == "__main__":
     epsilon = 0.1
     alpha = 0.1
     c = 2
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Define the bandit here: bandit1 = ...")
-    # TODO: 5 lines missing.
-    raise NotImplementedError("define agents list here")
+    bandit1 = StationaryBandit(k=10) 
+    agents = [BasicAgent(bandit1, epsilon=epsilon)] 
+    agents += [MovingAverageAgent(bandit1, epsilon=epsilon, alpha=alpha)]
+    agents += [GradientAgent(bandit1, alpha=alpha,use_baseline=False) ]
+    agents += [GradientAgent(bandit1, alpha=alpha,use_baseline=True) ]
+    agents += [UCBAgent(bandit1, c=2)] 
     labels = ["Basic", "Moving avg.", "gradient", "Gradient+baseline", "UCB"]
     '''
     Stationary, no offset. Vanilla setting.
     '''
     intro(bandit1, agents)
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Call eval_and_plot here")
+    eval_and_plot(bandit1, agents, max_episodes=2000, labels=labels) 
     plt.suptitle("Stationary bandit (no offset)")
     savepdf("grand_race_1")
     plt.show()
@@ -41,11 +42,9 @@ if __name__ == "__main__":
     Stationary, but with offset
     '''
     print("Whew what a race. Let's get ready to next round:")
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Define bandit2 = ... here")
+    bandit2 = StationaryBandit(k=10, q_star_mean=4) 
     intro(bandit2, agents)
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Call eval_and_plot here")
+    eval_and_plot(bandit2, agents, max_episodes=2000, labels=labels) 
     plt.suptitle("Stationary bandit (with offset)")
     savepdf("grand_race_2")
     plt.show()
@@ -53,11 +52,9 @@ if __name__ == "__main__":
     Long (nonstationary) simulations
     '''
     print("Whew what a race. Let's get ready to next round which will be a long one.")
-    # TODO: 1 lines missing.
-    raise NotImplementedError("define bandit3 here")
+    bandit3 = NonstationaryBandit(k=10)  
     intro(bandit3, agents)
-    # TODO: 1 lines missing.
-    raise NotImplementedError("call eval_and_plot here")
+    eval_and_plot(bandit3, agents, max_episodes=2000, steps=10000, labels=labels)  
     plt.suptitle("Non-stationary bandit (no offset)")
     savepdf("grand_race_3")
     plt.show()
@@ -71,8 +68,7 @@ if __name__ == "__main__":
     agents2 += [UCBAgent(bandit1, c=2)]
     labels = ["Gradient", "Gradient+baseline", "UCB"]
     intro(bandit1, agents2)
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Call eval_and_plot here")
+    eval_and_plot(bandit1, agents2, steps=10000, labels=labels)   
     plt.suptitle("Stationary bandit (no offset)")
     savepdf("grand_race_4")
     plt.show()

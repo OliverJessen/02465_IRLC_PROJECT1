@@ -65,8 +65,8 @@ class ApolloLunarAgent(Agent):
         """ You need to specify the inputs to the controllers. Look at the code in the link above and implement a comparable control rule. 
         The inputs you give to the controller will be simple functions of the coordinates of x, i.e. x[0], x[1], and so on.
         """
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Compute the alt_adj and ang_adj as in the gitlab repo (see code comment).")
+        alt_adj = self.pid_alt.pi( -(np.abs(x[0])- x[1]) ) 
+        ang_adj = self.pid_ang.pi( -((.25 * np.pi) * (x[0] + x[2]) - x[4]) ) 
 
         u = np.array([alt_adj, ang_adj])
         u = np.clip(u, -1, +1)

@@ -28,8 +28,15 @@ class GradientAgent(Agent):
         return np.random.choice( self.k, p=self.Pa() )
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None): 
-        # TODO: 9 lines missing.
-        raise NotImplementedError("Implement function body")
+        pi_a = self.Pa()
+        for b in range(self.k):
+            if b == a:
+                self.H[b] += self.alpha * (r - self.R_bar) * (1 - pi_a[b])
+            else:
+                self.H[b] -= self.alpha * (r - self.R_bar) * pi_a[b]
+
+        if self.baseline:
+            self.R_bar = self.R_bar + (self.alpha if self.alpha is not None else 1/(self.t+1)) * (r - self.R_bar) 
 
     def __str__(self):
         return f"{type(self).__name__}_{self.alpha}_{'baseline' if self.baseline else 'no_baseline'}"

@@ -27,9 +27,7 @@ class InventoryDPModel(DPModel):
         return max(0, min(2, x + u - w ))
 
     def Pw(self, x, u, k): # Distribution over random disturbances 
-        # TODO: 1 lines missing.
         return {0:.1, 1:.7, 2:0.2}
-        raise NotImplementedError("Implement function body")
 
     def gN(self, x): # Terminal cost is not used in this problem, so just return 0.
         return 0 

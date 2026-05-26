@@ -10,13 +10,11 @@ from irlc.ex04.control_environment import ControlEnvironment
 class PIDLocomotiveAgent(Agent):
     def __init__(self, env: ControlEnvironment, dt, Kp=1.0, Ki=0.0, Kd=0.0, target=0):
         # self.pid = PID(dt=...)
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Make a pid instance here.")
+        self.pid = PID(dt=dt, Kp=Kp, Ki=Ki, Kd=Kd, target=target) 
         super().__init__(env)
 
     def pi(self, x, k, info=None):
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Get the correct action using self.pid.pi(...). Same as previous exercise")
+        u = self.pid.pi(x[0]) 
         u = np.clip(u, self.env.action_space.low[0], self.env.action_space.high[0]) # Clip actions to ensure u is in the action space
         return np.asarray([u]) # Must return actions as numpy ndarrays.
 

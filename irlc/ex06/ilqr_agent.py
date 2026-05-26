@@ -32,8 +32,7 @@ class ILQRAgent(Agent):
                 print(k, len(self.ubar))
                 k = len(self.ubar)-1
             # See (Her25, eq. (17.16))
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Generate action using the control matrices.")
+            u = self.ubar[k] + self.L[k]@ (x-self.xbar[k]) + self.l[k] 
         return u
 
 def solve_rendevouz():

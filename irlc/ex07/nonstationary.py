@@ -20,8 +20,8 @@ class NonstationaryBandit(StationaryBandit):
         Hint: use reward_change_std * np.random.randn() to generate a single random number with the given std.
          then add one to each coordinate. Remember you have to compute the regret as well, see StationaryBandit for ideas.
          (remember the optimal arm will change when you add noise to q_star) """
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Implement function body")
+        self.q_star += self.reward_change_std * np.random.randn(self.k)
+        self.optimal_action = np.argmax(self.q_star) 
         return super().bandit_step(a)
 
     def __str__(self):
@@ -34,12 +34,11 @@ class MovingAverageAgent(BasicAgent):
     as described in (SB18, Eqn. (2.3))
     """
     def __init__(self, env, epsilon, alpha): 
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Implement function body")
+        self.alpha=alpha
+        super().__init__(env, epsilon=epsilon) 
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None): 
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement function body")
+        self.Q[a] = self.Q[a] + self.alpha * (r-self.Q[a])
 
     def __str__(self):
         return f"{type(self).__name__}_{self.epsilon}_{self.alpha}"
@@ -50,12 +49,13 @@ if __name__ == "__main__":
     epsilon = 0.1
     alphas = [0.15, 0.1, 0.05]
 
-    # TODO: 4 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    bandit = NonstationaryBandit(k=10) 
+
+    agents = [BasicAgent(bandit, epsilon=epsilon)]
+    agents += [MovingAverageAgent(bandit, epsilon=epsilon, alpha=alpha) for alpha in alphas] 
 
     labels = [f"Basic agent, epsilon={epsilon}"]
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    labels += [f"Mov.avg. agent, epsilon={epsilon}, alpha={alpha}" for alpha in alphas] 
     use_cache = False # Set this to True to use cache (after code works!)
     eval_and_plot(bandit, agents, steps=10000, num_episodes=200, labels=labels, use_cache=use_cache)
     savepdf("nonstationary_bandits")

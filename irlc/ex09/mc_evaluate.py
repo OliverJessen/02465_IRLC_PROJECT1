@@ -24,11 +24,10 @@ def get_MC_return_S(episode, gamma, first_visit=True):
     G = 0
     returns = []
     for t in reversed(range(len(episode))):
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        G = gamma * G + episode[t][2] 
+        s_t = episode[t][0] 
         if s_t not in ss[:t] or not first_visit: 
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Implement function body")
+            returns.append((s_t, G))
     return returns
 class MCEvaluationAgent(ValueAgent): 
     def __init__(self, env, policy=None, gamma=1, alpha=None, first_visit=True, v_init_fun=None):
@@ -46,11 +45,11 @@ class MCEvaluationAgent(ValueAgent):
             returns = get_MC_return_S(self.episode, self.gamma, self.first_visit)
             for s, G in returns:  
                 if self.alpha: 
-                    # TODO: 1 lines missing.
-                    raise NotImplementedError("Implement function body")
+                    self.v[s] = self.v[s] + self.alpha * (G - self.v[s])
                 else: 
-                    # TODO: 3 lines missing.
-                    raise NotImplementedError("Implement function body")
+                    self.returns_sum_S[s] += G
+                    self.returns_count_N[s] += 1.0
+                    self.v[s] = self.returns_sum_S[s] / self.returns_count_N[s] 
 
             self.episode = []
 
@@ -104,12 +103,10 @@ if __name__ == "__main__":
         are the desired result. 
         """
         agent_first = MCEvaluationAgent(env, gamma=gamma, first_visit=True)
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Create and train an every-visit agent.")
+        agent_every = MCEvaluationAgent(env, gamma=gamma, first_visit=False) 
 
         train(env, agent_first, num_episodes=episodes, verbose=False)
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Create and train an every-visit agent.")
+        train(env, agent_every, num_episodes=episodes, verbose=False) 
 
         fv.append(agent_first.v[(1,1)])
         ev.append(agent_every.v[(1,1)])

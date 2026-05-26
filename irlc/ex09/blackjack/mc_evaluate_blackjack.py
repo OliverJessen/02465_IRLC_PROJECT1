@@ -63,8 +63,7 @@ def plot_blackjack_policy(V, title):
         plt.colorbar()
 
 def policy20(s): 
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement the rule where we stick if we have a score of 20 or more.")
+    return 0 if s[0] >= 20 else 1
 
 if __name__ == "__main__":
     from irlc.ex09.mc_evaluate import MCEvaluationAgent
@@ -79,8 +78,8 @@ if __name__ == "__main__":
     experiment = f"experiments/{nenv}_first_{episodes}"
     """ Instantiate the agent and call the training method here. Make sure to pass the policy=policy20 function to the MCEvaluationAgent
      and set gamma=1. """
-    # TODO: 2 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    agent = MCEvaluationAgent(env, policy=policy20, gamma=1) 
+    train(env, agent, experiment_name=experiment, num_episodes=episodes) 
     main_plot(experiment, smoothing_window=episodes//100, resample_ticks=200)
     plt.ylim([-0.5, 0])
     plt.title("Blackjack using first-visit MC")

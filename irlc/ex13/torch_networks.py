@@ -87,8 +87,10 @@ class TorchDuelNetwork(TorchNetwork):
         """
         Return tensor corresponding to Q-values when using dueling Q-networks (see exercise description)
         """
-        # TODO: 4 lines missing.
-        raise NotImplementedError("Implement function body")
+        s = Variable(torch.FloatTensor(s))
+        x = self.feature(s)
+        advantage = self.advantage(x)
+        value = self.value(x) 
         return value + advantage - advantage.mean()
 
 class TorchDuelNetworkAtari(TorchNetwork):

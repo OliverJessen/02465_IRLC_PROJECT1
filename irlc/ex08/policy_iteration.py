@@ -43,8 +43,12 @@ def policy_iteration(mdp, gamma=1.0):
             using methods similar to those we saw in week2 of the DP problem.
             It is not a coincidence these algorithms are very similar -- if you think about it, the maximization step closely resembles the DP algorithm!
         """
-        # TODO: 6 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        for s in [mdp.nonterminal_states[i] for i in np.random.permutation(len(mdp.nonterminal_states))]:  
+            old_a = pi[s] # The best action we would take under the current policy
+            Qs = value_function2q_function(mdp, s, gamma, V)
+            pi[s] = max(Qs, key=Qs.get)
+            if old_a != pi[s]:
+                policy_stable = False 
     return pi, V
 
 if __name__ == "__main__":

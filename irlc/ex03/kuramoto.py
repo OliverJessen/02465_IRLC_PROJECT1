@@ -54,8 +54,7 @@ class KuramotoModel(ControlModel):
         where ``f_val`` is the symbolic expression corresponding to the dynamics, i.e. :math:`u(t) + \cos( x(t))`.
         Note you can use trigonometric functions like ``sym.cos``.
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement symbolic expression as a singleton list here")
+        symbolic_f_list = [u[0] + sym.cos(x[0])] 
         # define the symbolic expression 
         return symbolic_f_list  
 
@@ -64,8 +63,7 @@ def f(x, u):
     """ Implement the kuramoto osscilator model's dynamics, i.e. f such that dx/dt = f(x,u).
     The answer should be returned as a singleton list. """
     cmodel = KuramotoModel()
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    f_value = cmodel.f(x, u, t=0) 
     # Use the ContiniousKuramotoModel to compute f(x,u). If in doubt, insert a breakpoint and let pycharms autocomplete
     # guide you. See my video to Exercise 2 for how to use the debugger. Don't forget to specify t (for instance t=0).
     # Note that sympys error messages can be a bit unforgiving.
@@ -92,8 +90,13 @@ def rk4_simulate(x0, u, t0, tF, N=1000):
     for k in range(N):
         x_next = None # Obtain x_next = x_{k+1} using a single RK4 step.
         # Remember to insert breakpoints and use the console to examine what the various variables are.
-        # TODO: 7 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        Delta = tt[k + 1] - tt[k] 
+        xn = xs[k]
+        k1 = np.asarray(f(xn, u))
+        k2 = np.asarray(f(xn + Delta * k1/2, u))
+        k3 = np.asarray(f(xn + Delta * k2/2, u))
+        k4 = np.asarray(f(xn + Delta * k3,   u))
+        x_next = xn + 1/6 * Delta * (k1 + 2*k2 + 2*k3 + k4) 
         xs.append(x_next)
     xs = np.stack(xs, axis=0)
     return xs, tt

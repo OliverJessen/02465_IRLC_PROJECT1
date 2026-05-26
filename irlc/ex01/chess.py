@@ -39,9 +39,7 @@ class ChessTournament(Env):
             - s - The initial state (what is it?)
             - info - An empty dictionary, ``{}``
         """
-        # TODO: 1 lines missing.
-        self.s = [] # reset the state to an empty list, since we are starting a new tournament.
-        # raise NotImplementedError("Implement function body")
+        self.s = []
         return self.s, {}
 
     def step(self, action):
@@ -56,26 +54,19 @@ class ChessTournament(Env):
         :return: A tuple of the form :python:`(new_state, reward, done, False, {})`
         """
         game_outcome = None # should be -1, 0, or 1 depending on outcome of single game.
-        ## TODO: Oy veh, the following 7 lines below have been permuted. Uncomment, rearrange to the correct order and remove the error.
-        #-------------------------------------------------------------------------------------------------------------------------------
         if np.random.rand() < self.p_draw: 
             game_outcome = 0
+        else:
             if np.random.rand() < self.p_win:
                 game_outcome = 1
             else:
                 game_outcome = -1 
-            
-        # raise NotImplementedError("Compute game_outcome here")
         self.s.append(game_outcome)
 
         #done = True if the tournament has ended otherwise false. Compute using s.
-        # TODO: 1 lines missing. (done)
-        done = self.s[-1] == self.s[-2] and self.s[-1] != 0 if len(self.s) >= 2 else False # True if the last two games had the same outcome
-        #raise NotImplementedError("Compute 'done', whether the tournament has ended.")
+        done = len(self.s) >= 2 and self.s[-1] == self.s[-2] and self.s[-1] != 0 
         # r = ... . Compute reward. Let r=1 if we won the tournament otherwise 0.
-        # TODO: 1 lines missing.
-        r = 1 if done and self.s[-1] == 1 else 0 # reward is 1 if we won the tournament, otherwise 0.
-        # raise NotImplementedError("Compute the reward 'r' here.")
+        r = self.s[-1] == 1 if done else 0   
         return self.s, r, done, False, {}
 
 def main():
@@ -89,9 +80,7 @@ def main():
     from irlc import train, Agent
     env = ChessTournament()
     # Compute stats using the train function. Simulate the tournament for a total of T=10'000 episodes.
-    # TODO: 1 lines missing.
-    stats, _ = train(env, Agent(env), num_episodes=T)
-    # raise NotImplementedError("Compute stats here using train(env, ...). Use num_episodes.")
+    stats, _ = train(env, Agent(env), num_episodes=T) 
     p_win = np.mean([st['Accumulated Reward'] for st in stats])
     avg_length = np.mean([st['Length'] for st in stats])
 

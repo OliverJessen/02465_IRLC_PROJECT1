@@ -32,15 +32,13 @@ class GoAroundAgent(Agent):
             - Ignore the info dictionary; you can probably also ignore the state x.
             - The function should return a string (the actions are strings such as 'North')
         """
-        # TODO: 7 lines missing.
         if k < 7:
             return 'South'
         elif k < 14:
             return 'East'
         elif k < 21:
             return 'North'
-        elif k < 28:
-        # raise NotImplementedError("Implement function body")
+        elif k < 28: 
             return 'West'
 
 if __name__ == "__main__":

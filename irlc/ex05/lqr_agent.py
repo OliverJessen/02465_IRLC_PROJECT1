@@ -12,10 +12,7 @@ class LQRAgent(Agent):
         """ Define A, B as the list of A/B matrices here. I.e. x[t+1] = A x[t] + B x[t] + d.
         You should use the function model.f to do this, which has build-in functionality to compute Jacobians which will be equal to A, B """
         """ Define self.L, self.l here as the (lists of) control matrices. """
-        ## TODO: Half of each line of code in the following 1 lines have been replaced by garbage. Make it work and remove the error.
-        #----------------------------------------------------------------------------------------------------------------------------
-        # (self.L, self.l), _ = LQR(A=[A]*N, B=[B]*N, d=[d]*N if d is not No???????????????????????????????????????????????????????????????????
-        raise NotImplementedError("Insert your solution and remove this error.")
+        (self.L, self.l), _ = LQR(A=[A]*N, B=[B]*N, d=[d]*N if d is not None else None, Q=[Q]*N, q=[q]*N if q is not None else None, R=[R]*N) 
         self.dt = env.dt
         super().__init__(env)
 
@@ -24,8 +21,7 @@ class LQRAgent(Agent):
         Compute the action here using u = L_k x + l_k.
         You should use self.L, self.l to get the control matrices (i.e. L_k = self.L[k] ),
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Compute current action here")
+        u = self.L[k] @ x + self.l[k]  
         return u
 
 

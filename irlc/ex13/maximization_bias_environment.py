@@ -46,11 +46,9 @@ class MaximizationBiasEnvironment(MDP):
         t = 2 # terminal state
         if s == self.state_A:
             if a == self.RIGHT: 
-                # TODO: 1 lines missing.
-                raise NotImplementedError("Implement what the environment does in state A with a RIGHT action")
+                return {(t, 0): 1}
             else:  
-                # TODO: 1 lines missing.
-                raise NotImplementedError("Implement what the environment does in state A with a LEFT action")
+                return {(self.state_B, 0): 1}
         else: # s is in state B
             p = 1/self.n_transitions # transition probability
             rewards = [np.random.randn() for _ in range(self.n_transitions)]

@@ -9,12 +9,14 @@ class Toy2DControl(ControlModel):
         # You get the cost-function for free because it can be anything as far as this problem is concerned.
         return SymbolicQRCost(Q=np.eye(2), R=np.eye(1))
 
-    # TODO: 2 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    def sym_f(self, x, u, t=None): 
+        return [x[1], sym.cos(x[0] + u[0])] 
 
 def toy_simulation(u0 : float, T : float) -> float:
-    # TODO: 4 lines missing.
-    raise NotImplementedError("Create a Toy2dControl instance and use model.simulate(..) to get the final state.")
+    toy = Toy2DControl() 
+    x0 = np.asarray([np.pi/2, 0])
+    xs, us, ts, cost = toy.simulate( x0=x0, u_fun = u0, t0=0, tF=T)
+    wT = xs[-1][0] 
     return wT
 
 if __name__ == "__main__":

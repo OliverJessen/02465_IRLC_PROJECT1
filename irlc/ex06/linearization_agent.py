@@ -21,12 +21,13 @@ class LinearizationAgent(Agent):
         """ Define A, B, d as the list of A/B matrices here. I.e. x[t+1] = A x[t] + B u[t] + d.
         You should use the function model.f to do this, which has build-in functionality to compute Jacobians which will be equal to A, B.
         It is important that you linearize around xbar, ubar. See (Her25, Section 17.1) for further details. """
-        # TODO: 4 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        xp = model.f(xbar, ubar, k=0) 
+        A, B = model.f_jacobian(xbar, ubar, k=0)
+
+        d = xp - A @ xbar - B @ ubar 
         Q, q, R = self.model.cost.Q, self.model.cost.q, self.model.cost.R
         """ Define self.L, self.l here as the (lists of) control matrices. """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Compute control matrices L, l here using LQR(...)")
+        (self.L, self.l), (V, v, vc) = LQR(A=[A]*N, B=[B]*N, d=[d]*N, Q=[Q]*N, q=[q]*N, R=[self.model.cost.R]*N) 
         super().__init__(env)
 
     def pi(self, x, k, info=None):
@@ -37,8 +38,7 @@ class LinearizationAgent(Agent):
         The reason we use L_0, l_0 (and not L_k, l_k) is because the LQR problem itself is an approximation of the true dynamics
         and this controller will be able to balance the pendulum for an infinite amount of time.
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Compute current action here")
+        u = self.L[0] @ x + self.l[0] 
         return u
 
 

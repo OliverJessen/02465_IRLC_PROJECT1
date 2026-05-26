@@ -31,8 +31,7 @@ class QAgent(TabularAgent):
         """
         Return current action using epsilon-greedy exploration. You should look at the TabularAgent class for ideas.
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement the epsilon-greedy policy here.")
+        action =  self.pi_eps(s, info=info)
         return action
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None): 
@@ -43,8 +42,9 @@ class QAgent(TabularAgent):
 
         You may want to look at self.Q.get_optimal_action(state) to compute a = argmax_a Q[s,a].
         """
-        # TODO: 3 lines missing.
-        raise NotImplementedError("Update the Q[s,a]-values here.")
+        if not done:
+            a_star = self.Q.get_optimal_action(sp, info_sp)
+        self.Q[s,a] += self.alpha * (r + self.gamma * (0 if done else self.Q[sp,a_star]) - self.Q[s,a]) 
 
     def __str__(self):
         return f"QLearner_{self.gamma}_{self.epsilon}_{self.alpha}"

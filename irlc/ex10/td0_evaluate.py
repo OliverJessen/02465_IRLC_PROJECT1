@@ -11,8 +11,9 @@ class TD0ValueAgent(ValueAgent):
         super().__init__(env, gamma=gamma, policy=policy, v_init_fun=v_init_fun)
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None): 
-        # TODO: 3 lines missing.
-        raise NotImplementedError("Implement function body")
+        if isinstance(s, np.ndarray):
+            print("Bad type.")
+        self.v[s] += self.alpha * (r + self.gamma * (self.v[sp] if not done else 0) - self.v[s]) 
 
     def __str__(self):
         return f"TD0Value_{self.gamma}_{self.alpha}"

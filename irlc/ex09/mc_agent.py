@@ -21,11 +21,10 @@ def get_MC_return_SA(episode, gamma, first_visit=True):
     G = 0
     returns = []
     for t in reversed(range(len(episode))):
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        G = gamma * G + episode[t][2] 
+        sa_t = episode[t][:2] 
         if sa_t not in sa[:t] or not first_visit: 
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Implement function body")
+            returns.append(sa_t + (G,) )
     return returns
 
 class MCAgent(TabularAgent): 
@@ -43,8 +42,7 @@ class MCAgent(TabularAgent):
         Compute the policy of the MC agent. Remember the agent is epsilon-greedy. You can use the pi_eps(s,info)-function defined
         in the TabularAgent class.
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Compute action here using the Q-values. (remember to be epsilon-greedy)")
+        return self.pi_eps(s, info)
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None):  
         """
@@ -55,8 +53,18 @@ class MCAgent(TabularAgent):
         see comments in the Agent class for more details, however for now you can consider them as simply a nested
         structure where ``self.Q[s, a]`` defaults to 0 unless the Q-value has been updated.
         """
-        # TODO: 12 lines missing.
-        raise NotImplementedError("Train the agent here.")
+        self.episode.append((s, a, r))
+        if done:
+            returns = get_MC_return_SA(self.episode, self.gamma, self.first_visit)
+            for s, a, G in returns:
+                # s,a = sa
+                if self.alpha is None:
+                    self.returns_sum_S[s, a] += G
+                    self.returns_count_N[s, a] += 1
+                    self.Q[s, a] = self.returns_sum_S[s, a] / self.returns_count_N[s, a]
+                else:
+                    self.Q[s, a] += self.alpha * (G - self.Q[s, a])
+            self.episode = [] 
 
     def __str__(self):
         return f"MC_{self.gamma}_{self.epsilon}_{self.alpha}_{self.first_visit}"

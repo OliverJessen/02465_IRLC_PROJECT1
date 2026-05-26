@@ -1,23 +1,20 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 def add(a, b): 
     """  This function shuold return the sum of a and b. I.e. if print(add(2,3)) should print '5'. """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    return a+b
 
 def misterfy(animals : list[str]) -> list[str]: 
     """
     Given a list of animals like animals=["cat", "wolf", "elephans"], this function should return
     a list like ["mr cat", "mr wolf", "mr elephant"]  """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    return ["mr " + a for a in animals]
 
 def mean_value(p_dict : dict) -> float: 
     """
     Given a dictionary of the form: {x: probability_of_x, ...} compute the mean value of
     x, i.e. sum_i x_i * p(x_i). The recommended way is to use list comprehension and not numpy.
     Hint: Look at the .items() method and the build-in sum(my_list) method. """
-    # TODO: 1 lines missing.
-    raise NotImplementedError("Implement function body")
+    return sum([x * p for x, p in p_dict.items()])
 
 
 class BasicFruitShop:
@@ -33,8 +30,7 @@ class BasicFruitShop:
         """ Return the cost in pounds of the fruit with name 'fruit'. It uses the self.prices variable
         to get the price.
         You don't need to do exception handling here. """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Return cost of fruit as a floating point number")
+        return self.prices[fruit]
 
 
 if __name__ == '__main__':

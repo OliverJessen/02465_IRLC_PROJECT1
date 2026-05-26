@@ -17,38 +17,30 @@ class InventoryEnvironment(Env):
 
     def step(self, a): # (done)
         w = np.random.choice(3, p=(.1, .7, .2))    # Generate random disturbance 
-        # TODO: 5 lines missing.
-        s_next = max(0, min(2, self.s-w+a)) # current state plus action minus disturbance
-        reward = -(a + (self.s + a - w)**2) # calculate the obtained reward
-        terminated = self.k == self.N-1 # are we terminated yet? is it state N-1
-        self.s = s_next
-        self.k +=1
-        # raise NotImplementedError("Insert your solution and remove this error.")
+        s_next = max(0, min(2, self.s-w+a))           # next state; x_{k+1} =  f_k(x_k, u_k, w_k) 
+        reward = -(a + (self.s + a - w)**2)           # reward = -cost      = -g_k(x_k, u_k, w_k)
+        terminated = self.k == self.N-1               # Have we terminated? (i.e. is k==N-1)
+        self.s = s_next                               # update environment state
+        self.k += 1                                   # update current time step 
         return s_next, reward, terminated, False, {}  # return transition information  
 
 class RandomAgent(Agent): # (done)
     def pi(self, s, k, info=None): 
         """ Return action to take in state s at time step k """
-        # TODO: 1 lines missing.
-        return np.random.choice(3)
-        raise NotImplementedError("Implement function body")
+        return np.random.choice(3) # Return a random action
 
 
 def simplified_train(env: Env, agent: Agent) -> float: # (done)
     s, _ = env.reset()
     J = 0  # Accumulated reward for this rollout
     for k in range(1000):
-        ## TODO: Oy veh, the following 7 lines below have been permuted. Uncomment, rearrange to the correct order and remove the error.
-        #-------------------------------------------------------------------------------------------------------------------------------
         a = agent.pi(s, k) 
         sp, r, terminated, truncated, metadata = env.step(a)
         agent.train(s, a, sp, r, terminated)
         s = sp
         J += r
-        if terminated or truncated:    
+        if terminated or truncated:
             break 
-
-        # raise NotImplementedError("Remove this exception after the above lines have been uncommented and rearranged.")
     return J 
 
 def run_inventory():

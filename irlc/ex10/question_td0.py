@@ -1,19 +1,28 @@
 # This file may not be shared/redistributed without permission. Please read copyright notice in the git repo. If this file contains other copyright notices disregard this text.
 def a_compute_deltas(v: dict, states: list, rewards: list, gamma: float) -> list:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    deltas = []  
+    for t, (s, r) in enumerate(zip(states[:-1], rewards)):
+        sp = states[t + 1]
+        delta = (r + gamma * v[sp]) - v[s]
+        deltas.append(delta)  
     return deltas
 
 
 def b_perform_td0(v: dict, states: list, rewards: list, gamma: float, alpha: float) -> dict:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    for t in range(len(rewards)):  
+        s = states[t]
+        sp = states[t + 1]
+        r = rewards[t]
+        delta = r + gamma * v[sp] - v[s]
+        v[s] = v[s] + alpha * delta  
     return v
 
 
 def c_perform_td0_batched(v: dict, states: list, rewards: list, gamma: float, alpha: float) -> dict:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    deltas = a_compute_deltas(v, states, rewards, gamma)  
+    for t in range(len(rewards)):
+        s = states[t]
+        v[s] = v[s] + alpha * deltas[t]  
     return v
 
 

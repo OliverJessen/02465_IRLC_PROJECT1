@@ -4,14 +4,24 @@ from irlc.ex02.inventory import InventoryDPModel
 def a_expected_items_next_day(x : int, u : int) -> float:
     model = InventoryDPModel()
     expected_number_of_items = None
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    k = 0 
+    expected_number_of_items = sum([p * model.f(x, u, w, k=0) for w, p in model.Pw(x, u, k).items()]) 
     return expected_number_of_items
 
 
 def b_evaluate_policy(pi : list, x0 : int) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = InventoryDPModel()     
+    N = model.N
+    J = [{} for _ in range(N + 1)]
+    J[N] = {x: model.gN(x) for x in model.S(model.N)}
+    for k in range(N - 1, -1, -1):
+        for x in model.S(k):
+            Qu = {u: sum(pw * (model.g(x, u, w, k) + J[k + 1][model.f(x, u, w, k)]) for w, pw in model.Pw(x, u, k).items()) for u
+                  in model.A(x, k)}
+
+            umin = pi[k][x] # min(Qu, key=Qu.get)
+            J[k][x] = Qu[umin]  # Compute the expected cost function
+    J_pi_x0 = J[0][x0] 
     return J_pi_x0
 
 if __name__ == "__main__":

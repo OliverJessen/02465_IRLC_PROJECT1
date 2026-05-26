@@ -20,9 +20,7 @@ class DeterministicInventoryDPModel(DPModel):
     def Pw(self, x, u, k): # Distribution over random disturbances 
         """In this problem we assume that p(w=k+1) = 1.
         Return this as a dictionary of the form: {w : p(w)}."""
-        # TODO: 1 lines missing.
-        return {k+1: 1}
-        raise NotImplementedError("Implement function body")
+        return {k + 1: 1}
 
     def gN(self, x):
         return 0

@@ -19,22 +19,19 @@ class SarsaAgent(QAgent):
     def pi(self, s, k, info=None):
         if k == 0: 
             """ we are at the beginning of the episode. Generate a by being epsilon-greedy"""
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Implement function body")
+            return self.pi_eps(s, info)
         else: 
             """ Return the action self.a you generated during the train where you know s_{t+1} """
-            # TODO: 1 lines missing.
-            raise NotImplementedError("Implement function body")
+            return self.a
 
     def train(self, s, a, r, sp, done=False, info_s=None, info_sp=None):
         """
         generate A' as self.a by being epsilon-greedy. Re-use code from the Agent class.
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("self.a = ....")
+        self.a = self.pi_eps(sp, info_sp) if not done else -1 
         """ now that you know A' = self.a, perform the update to self.Q[s,a] here """
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Insert your solution and remove this error.")
+        delta = r + (self.gamma * self.Q[sp,self.a] if not done else 0) - self.Q[s,a] 
+        self.Q[s,a] += self.alpha * delta 
 
     def __str__(self):
         return f"Sarsa{self.gamma}_{self.epsilon}_{self.alpha}"

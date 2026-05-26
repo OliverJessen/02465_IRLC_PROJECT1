@@ -21,8 +21,7 @@ class LinearSemiGradSarsaN(SarsaNAgent, LinearSemiGradSarsa):
         """
         Return Q(s,a) using the linear function approximator with weights self.w; i.e. use self.q
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement function body")
+        return self.Q(s, a)
 
     def _upd_q(self, s, a, delta): 
         """
@@ -34,8 +33,7 @@ class LinearSemiGradSarsaN(SarsaNAgent, LinearSemiGradSarsa):
         where
            delta = (G^n - Q(s,a;w)
         """
-        # TODO: 1 lines missing.
-        raise NotImplementedError("Implement function body")
+        self.Q.w += self.alpha * delta * self.Q.x(s,a)  # Update q(s,a)/weights given change in q-values: delta = [G-\hat{q}(..)]
 
     def __str__(self):
         return f"LinSemiGradSarsaN{self.gamma}_{self.epsilon}_{self.alpha}_{self.n}"

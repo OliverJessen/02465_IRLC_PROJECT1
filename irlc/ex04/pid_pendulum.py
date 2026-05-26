@@ -17,8 +17,8 @@ class PIDPendulumAgent(Agent):
     def pi(self, x, k, info=None): 
         """ Compute action using self.pid. YCartpoleou have to think about the inputs as they will depend on
         whether balance_to_x0 is true or not.  """
-        # TODO: 2 lines missing.
-        raise NotImplementedError("Implement function body")
+        u = self.pid.pi(x[0])
+        u = np.clip(u, self.env.action_space.low, self.env.action_space.high) 
         return u
 
 
@@ -48,10 +48,7 @@ if __name__ == "__main__":
     For this task, we do not care about the x-position, only the angle theta which should be 0 (upright)
     """
     env = get_offbalance_pendulum(30)
-    ## TODO: Half of each line of code in the following 1 lines have been replaced by garbage. Make it work and remove the error.
-    #----------------------------------------------------------------------------------------------------------------------------
-    # agent = PIDPendulumAgent(env, dt=env.??????????????????????????????????????
-    raise NotImplementedError("Define your agent here (including parameters)")
+    agent = PIDPendulumAgent(env, dt=env.dt, Kp=12, Ki=0, Kd=2, target_angle=0) 
     _, trajectories = train(env, agent, num_episodes=1, return_trajectory=True, reset=False)  # Note reset=False to maintain initial conditions.
     env.close()
     plot_trajectory(trajectories[0])
@@ -62,10 +59,7 @@ if __name__ == "__main__":
     Second task: We will now try to get to a target angle of target_angle=np.pi/6.    
     """
     env = get_offbalance_pendulum(30)
-    ## TODO: Half of each line of code in the following 1 lines have been replaced by garbage. Make it work and remove the error.
-    #----------------------------------------------------------------------------------------------------------------------------
-    # agent = PIDPendulumAgent(env, dt=env.dt,?????????????????????????????????????????
-    raise NotImplementedError("Define your agent here (include the target_angle parameter to the agent!)")
+    agent = PIDPendulumAgent(env, dt=env.dt, Kp=12, Ki=2, Kd=2, target_angle=np.pi/6) 
     _, trajectories = train(env, agent, num_episodes=1, return_trajectory=True, reset=False)  # Note reset=False to maintain initial conditions.
     env.close()
     plot_trajectory(trajectories[0])

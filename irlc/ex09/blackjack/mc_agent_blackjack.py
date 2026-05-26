@@ -18,8 +18,7 @@ def run_experiment(episodes, first_visit=True, **kwargs):
     title = f"MC agent ({fvl} visit)"
 
     expn = f"experiments/{env_name}_MCagent_{episodes}_{first_visit}_{lbl}" # Name the experiment. Pass the label to the train function to store intermediate results. See the online documentation for more information.
-    # TODO: 1 lines missing.
-    raise NotImplementedError("call the train(...) function here.")
+    train(env, agent, expn, num_episodes=episodes, return_trajectory=False) 
 
     # Matplotlib with seaborn is for some reason very slow.
     # This code re-samples the curve to just 400 points:
