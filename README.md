@@ -4,6 +4,8 @@ This repository contains code for 02465, introduction to machine learning and co
 
  - https://www2.compute.dtu.dk/courses/02465/information/installation.html
 
+For a practical setup checklist for this repo, including `uv` setup, offline use, and troubleshooting, see [SETUP.md](SETUP.md).
+
 
 ## License
 Some of the code in this repository is not written by me and the licensing terms are as indicated in the relevant files.
