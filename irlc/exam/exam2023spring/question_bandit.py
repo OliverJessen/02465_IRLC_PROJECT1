@@ -1,18 +1,26 @@
 import numpy as np
 
 def a_select_next_action_epsilon0(k : int, actions : list, rewards : list) -> int:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    a = b_select_next_action(k, actions, rewards, epsilon=0)
     return a
 
 def b_select_next_action(k : int, actions : list, rewards : list, epsilon : float) -> int:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    N = {a: 0 for a in range(k)}
+    S = {a: 0 for a in range(k)}
+    for a, r in zip(actions, rewards):
+        N[a] += 1
+        S[a] += r
+    Q = {a: S[a] / N[a] if N[a] > 0 else 0 for a in range(k)}
+    if np.random.rand() < epsilon:
+        a = np.random.randint(k)
+    else:
+        a = max(Q, key=Q.get)
     return a
 
 def c_nonstationary_Qs(k : int, actions : list, rewards : list, alpha : float) -> dict:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    Q = {a: 0 for a in range(k)}
+    for a, r in zip(actions, rewards):
+        Q[a] = Q[a] + alpha * (r - Q[a])
     return Q
 
 if __name__ == "__main__":

@@ -3,17 +3,23 @@ import sympy as sym
 from irlc.ex03.control_model import ControlModel
 from irlc.ex03.control_cost import SymbolicQRCost
 
-# TODO: Code has been removed from here.
-raise NotImplementedError("Insert your solution and remove this error.")
+class Simulation(ControlModel):
+    def sym_f(self, x, u, t=None):
+        return [-sym.exp(u[0] - x[0]**2)]
+
+    def get_cost(self):
+        return SymbolicQRCost(Q=np.eye(1), R=np.eye(1))
 
 def a_xdot(x : float, a : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    m = Simulation()
+    u = a * x**2
+    xdot = m.f((x,), (u,), 0)[0]
     return xdot
 
 def b_rk4_simulate(u0 : float, tF : float):
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    m = Simulation()
+    xs, us, ts, J = m.simulate((0,), u_fun=(u0,), t0=0, tF=tF)
+    xF = xs[-1][0]
     return xF
 
 if __name__ == "__main__":

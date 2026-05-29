@@ -2,17 +2,36 @@ from irlc.exam.exam2023spring.inventory import InventoryDPModel
 from irlc.exam.exam2023spring.dp import DP_stochastic
 import numpy as np
 
-# TODO: Code has been removed from here.
-raise NotImplementedError("Insert your solution and remove this error.")
+class InventoryDPModelB(InventoryDPModel):
+    def __init__(self, N=3, c=0., prob_empty=False):
+        self.c = c
+        self.prob_empty = prob_empty
+        super().__init__(N=N)
+
+    def g(self, x, u, w, k):
+        if self.prob_empty:
+            return 0
+        return u * self.c + np.abs(x + u - w)
+
+    def f(self, x, u, w, k):
+        return max(0, min(max(self.S(k)), x + u - w))
+
+    def Pw(self, x, u, k):
+        return {0: .1, 1: .3, 2: .6}
+
+    def gN(self, x):
+        return -1 if self.prob_empty and x == 1 else 0
 
 def a_get_policy(N: int, c: float, x0 : int) -> int:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = InventoryDPModelB(N=N, c=c, prob_empty=False)
+    J, pi = DP_stochastic(model)
+    u = pi[0][x0]
     return u
 
 def b_prob_one(N : int, x0 : int) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = InventoryDPModelB(N=N, prob_empty=True)
+    J, pi = DP_stochastic(model)
+    pr_empty = -J[0][x0]
     return pr_empty
 
 

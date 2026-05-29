@@ -2,21 +2,39 @@ from irlc.exam.exam2025spring.inventory import InventoryDPModel
 from irlc.exam.exam2025spring.dp import DP_stochastic
 
 
-# TODO: Code has been removed from here. 
+class CakeInventoryModel(InventoryDPModel):
+    def __init__(self, N=3, cost_per_cake=1., lazybaker=False):
+        self.lazybaker = lazybaker
+        self.cost_per_cake = cost_per_cake
+        super().__init__(N=N)
+
+    def A(self, x, k):
+        if self.lazybaker:
+            return {2 if k % 2 == 0 else 0}
+        return {0, 1, 2}
+
+    def g(self, x, u, w, k):
+        cakes_sold = min(w, x + u)
+        return u * self.cost_per_cake - cakes_sold
+
+    def gN(self, x):
+        return x**2
 
 def a_expected_cost(x0 : int, u0 : int) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = InventoryDPModel()
+    expected_cost = sum(model.g(x0, u0, w, k=0) * pw for w, pw in model.Pw(x0, u0, k=0).items())
     return expected_cost
 
 def b_best_action(N : int, cost_per_cake : float, k : int, x : int) -> int:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = CakeInventoryModel(N=N, cost_per_cake=cost_per_cake)
+    J, pi = DP_stochastic(model)
+    best_action = pi[k][x]
     return best_action
 
 def c_lazy_baker(N : int, cost_per_cake : float, x0 : int) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = CakeInventoryModel(N=N, cost_per_cake=cost_per_cake, lazybaker=True)
+    J, pi = DP_stochastic(model)
+    cost = J[0][x0]
     return cost
 
 if __name__ == "__main__":

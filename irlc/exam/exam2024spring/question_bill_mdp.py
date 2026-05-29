@@ -2,22 +2,45 @@ from irlc.exam.exam2024spring.mdp import MDP
 from irlc.exam.exam2024spring.policy_evaluation import policy_evaluation
 from irlc.exam.exam2024spring.value_iteration import value_iteration
 
-# TODO: Code has been removed from here.
-raise NotImplementedError("Insert your solution and remove this error.")
+class BigSpender(MDP):
+    def __init__(self, r_airbnb=0.01):
+        self.p_win = 0.45
+        self.r_airbnb = r_airbnb
+        super().__init__(initial_state=1)
+
+    def is_terminal(self, state):
+        return False
+
+    def A(self, s):
+        if s == 0:
+            return [0]
+        return [0, 1]
+
+    def Psr(self, s, a):
+        if s == 0:
+            return {(0, 0): 1}
+        if a == 0:
+            return {(1, self.r_airbnb): 1}
+        return {(0, 0): 1 - self.p_win, (1, 2): self.p_win}
 
 def a_always_airbnb(r_airbnb : float, gamma : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    mdp = BigSpender(r_airbnb=r_airbnb)
+    pi = {0: {0: 1}, 1: {0: 1, 1: 0}}
+    J = policy_evaluation(pi=pi, mdp=mdp, gamma=gamma)
+    v = J[1]
     return v
 
 def b_random_decisions(r_airbnb : float, gamma : float) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    mdp = BigSpender(r_airbnb=r_airbnb)
+    pi = {0: {0: 1}, 1: {0: 0.5, 1: 0.5}}
+    J = policy_evaluation(pi=pi, mdp=mdp, gamma=gamma)
+    v = J[1]
     return v
 
 def c_is_it_better_to_gamble(r_airbnb : float, gamma : float) -> bool:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    mdp = BigSpender(r_airbnb=r_airbnb)
+    pi, V = value_iteration(mdp, gamma)
+    better_to_gamble = pi[1] == 1
     return better_to_gamble
 
 if __name__ == "__main__":

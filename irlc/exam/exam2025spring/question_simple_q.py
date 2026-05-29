@@ -1,16 +1,23 @@
 def a_greedy_policy(q_values : dict, state : int) -> int:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    qs = {a: q_values[state, a] for a in [0, 1]}
+    astar = max(qs, key=qs.get)
     return astar
 
 def b_update_single_q(alpha, gamma, q_values: dict, state : int, action : int, reward : float, next_state : int) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    q_before = q_values[state, action]
+    q_next = max(q_values[next_state, a] for a in [0, 1])
+    updated_q = q_before + alpha * (reward + gamma * q_next - q_before)
     return updated_q
 
 def c_update_all_q(alpha, gamma, states_actions_rewards: list[tuple]) -> dict:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    q_values = {}
+    for t, (state, action, reward) in enumerate(states_actions_rewards[:-1]):
+        next_state, _, _ = states_actions_rewards[t + 1]
+        q_values.setdefault((state, action), 0)
+        for a in [0, 1]:
+            q_values.setdefault((next_state, a), 0)
+        q_next = max(q_values[next_state, a] for a in [0, 1])
+        q_values[state, action] = q_values[state, action] + alpha * (reward + gamma * q_next - q_values[state, action])
     return q_values
 
 

@@ -3,23 +3,40 @@ from irlc.ex04.discrete_control_model import DiscreteControlModel
 from irlc.exam.exam2023spring.dlqr import LQR
 import numpy as np
 
-# TODO: Code has been removed from here.
-raise NotImplementedError("Insert your solution and remove this error.")
+def getAB(a : float):
+    A = np.asarray([[1, a], [0, 1]])
+    B = np.asarray([0, 1])[:, np.newaxis]
+    d = np.asarray([1, 0])
+    return A, B, d
 
 def a_LQR_solve(a : float, x0 : np.ndarray) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    A, B, d = getAB(a)
+    Q = np.eye(2)
+    R = np.eye(1)
+    N = 100
+    (L, l), _ = LQR(A=[A] * N, B=[B] * N, d=[d] * N, Q=[Q] * N, R=[R] * N)
+    u = float((L[0] @ x0 + l[0])[0])
     return u
 
 def b_linearize(theta : float):
-    # TODO: 7 lines missing.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    model = PendulumModel()
+    dmodel = DiscreteControlModel(model=model, dt=0.5)
+    xbar = np.asarray([theta, 0])
+    ubar = np.asarray([0])
+    xp = dmodel.f(xbar, ubar, k=0)
+    A, B = dmodel.f_jacobian(xbar, ubar, k=0)
+    d = xp - A @ xbar - B @ ubar
     return A, B, d
 
 
 def c_get_optimal_linear_policy(x0 : np.ndarray) -> float:
-    # TODO: Code has been removed from here.
-    raise NotImplementedError("Insert your solution and remove this error.")
+    x0 = np.asarray(x0)
+    Q = np.eye(2)
+    R = np.eye(1)
+    A, B, d = b_linearize(theta=0)
+    N = 100
+    (L, l), _ = LQR(A=[A] * N, B=[B] * N, d=[d] * N, Q=[Q] * N, R=[R] * N)
+    u = float((L[0] @ x0 + l[0])[0])
     return u
 
 if __name__ == "__main__":
